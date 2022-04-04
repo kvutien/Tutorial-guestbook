@@ -21,6 +21,16 @@ To run this project locally:
 
 Now you'll have a local development environment backed by the NEAR TestNet! Running `yarn dev` will tell you the URL you can visit in your browser to see the app.
 
+**Note for Mac user with M1 chip**: `yarn` will throw an error because the node module **HID** is not ARM64-compliant and needs to be rebuilt, but the `make` failed. This module is optional so this error can be ignored. Just type again `yarn dev` to run the local blockchain backend.
+
+Open in Chrome the URL http://localhost:1234. It displays the GuestBook app's welcome page. Play with it. 
+
+1. Clicking on "Log in" shows a blockchain connection request (as with Ethereum's Metamask). You'll be request to give "limited permission": this is a concept that doesn't exist on Ethereum.
+2. When you submit a message without donation, you post a message but don't do any bmockchain transaction.
+3. When you submit with donation (the minimum amount is 0.01 NEAR) you'll see that the dApp does a transaction.
+
+That's all. Let's close the browser page and explore the code.
+
 
 Exploring The Code
 ==================
@@ -29,11 +39,12 @@ Exploring The Code
    the NEAR blockchain when you run `yarn deploy:contract`. This sort of
    code-that-runs-on-a-blockchain is called a "smart contract" – [learn more
    about NEAR smart contracts][smart contract docs].
-2. The frontend code lives in the `/src` folder.
+ 
+3. The frontend code lives in the `/src` folder, like all React frontends. The file
    [/src/index.html](/src/index.html) is a great place to start exploring. Note
-   that it loads in `/src/index.js`, where you can learn how the frontend
+   that it loads in `/src/index.js`, which code shows how the frontend
    connects to the NEAR blockchain.
-3. Tests: there are different kinds of tests for the frontend and backend. The
+4. Tests: the folder `/assembly/__tests__` contains the test source files. Testing is very important in blockchain programming because once deployed your code is immmutable. There are different kinds of tests for the frontend and backend. The
    backend code gets tested with the [asp] command for running the backend
    AssemblyScript tests, and [jest] for running frontend tests. You can run
    both of these at once with `yarn test`.
@@ -98,7 +109,7 @@ One command:
 As you can see in `package.json`, this does two things:
 
 1. builds & deploys smart contracts to NEAR TestNet
-2. builds & deploys frontend code to GitHub using [gh-pages]. This will only work if the project already has a repository set up on GitHub. Feel free to modify the `deploy` script in `package.json` to deploy elsewhere.
+2. builds & deploys frontend code to GitHub using [gh-pages]. This will only work if the project already has a repository set up on GitHub. Feel free to modify the `deploy` script in `package.json` to deploy elsewhere. In my example, the frontend is deployed at the address (Now the backend smart contract is in testnet under my account and the frontend is on github gh-pages: https://kvutien.github.io/Tutorial-guestbook/ 
 
 
 
