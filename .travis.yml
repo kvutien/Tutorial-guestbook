@@ -2,8 +2,8 @@ language: node_js
 node_js:
   - 12
 os:
-  - linux
   - osx
+  - linux
   - windows
 env:
   - NODE_ENV=ci YARN_GPG=no
